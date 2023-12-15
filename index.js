@@ -1,6 +1,6 @@
 import express from 'express';
 import http from 'node:http';
-import createBareServer from "@tomphttp/bare-server-node";
+import { createBareServer } from "@tomphttp/bare-server-node";
 import path from 'node:path';
 import cors from 'cors';
 
@@ -18,16 +18,15 @@ app.use(express.static(path.join(__dirname, 'static')));
 const routes = [
   { path: '/', file: 'index.html' },
   { path: '/news', file: 'apps.html' },
-  { path: '/algebra', file: 'games.html' },
+  { path: '/events', file: 'games.html' },
   { path: '/diagnostic', file: 'settings.html' },
-  { path: '/tabs', file: 'tabs.html' },
-  { path: '/go', file: 'go.html' },
-  { path: '/loading', file: 'loading.html' },
+  { path: '/local-news', file: 'tabs.html' },
+  { path: '/image-galleries', file: 'go.html' },
 ];
 
 app.get('/edu/*', cors({ origin: false }), async (req, res, next) => {
   try {
-    const reqTarget = `https://raw.githubusercontent.com/InterstellarNetwork/Interstellar-Assets/main/${req.params[0]}`;
+    const reqTarget = `https://raw.githubusercontent.com/ypxa/y/main/${req.params[0]}`;
     const asset = await fetch(reqTarget);
     
     if (asset.ok) {
